@@ -1,16 +1,24 @@
-import {
-    getHTML,
-    getTwitterFollowers,
-    getInstagramFollowers
-} from './lib/scraper';
+import express from 'express';
+import { getInstagramCount, getTwitterCount } from './lib/scraper';
+import db from './lib/db';
 
-async function go() {
-    const tPromise = getHTML('https://twitter.com/HlibaOndra');
-    const iPromise = getHTML('https://www.instagram.com/ondrahliba/');
-    const [twitterHtml, instaHtml] = await Promise.all([tPromise, iPromise]);
-    const twCount = await getTwitterFollowers(twitterHtml);
-    const instaCount = await getInstagramFollowers(instaHtml);
-    console.log(`You have ${twCount} Twitter followers and ${instaCount} Instagram Followers!`);
-}
+const app = express();
 
-go();
+db();
+
+const PORT = 3030;
+
+app.get('/scrape', async (req, res, next) => {
+  const [iCount, tCount] = await Promise.all([
+    getInstagramCount(),
+    getTwitterCount()
+  ]);
+  res.json({
+    iCount,
+    tCount
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Scraperoni is running on port ${PORT}!`);
+});

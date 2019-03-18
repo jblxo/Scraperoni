@@ -1,10 +1,10 @@
 {
-  "name": "Scraperoni",
+  "name": "scraperoni",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node -r esm index.js"
+    "dev": "nodemon -r esm index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
-    "esm": "^3.2.18"
+    "esm": "^3.2.18",
+    "express": "^4.16.4",
+    "lowdb": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
