@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
+import { uniqueCount } from './lib/utils';
 import db from './lib/db';
 import './lib/cron';
 
@@ -21,11 +22,14 @@ app.get('/scrape', async (req, res, next) => {
 });
 
 app.get('/data', async (req, res, next) => {
-  const twitter = db.get('twitter').value();
-  const instagram = db.get('instagram').value();
+  const { twitter, instagram } = db.value();
+
+  const uniqueTwitter = uniqueCount(twitter);
+  const uniqueInstagram = uniqueCount(instagram);
+
   res.json({
-    twitter,
-    instagram
+    twitter: uniqueTwitter,
+    instagram: uniqueInstagram
   });
 });
 
