@@ -4,8 +4,6 @@ import db from './lib/db';
 
 const app = express();
 
-db();
-
 const PORT = 3030;
 
 app.get('/scrape', async (req, res, next) => {
