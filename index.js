@@ -1,6 +1,7 @@
 import express from 'express';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
 import db from './lib/db';
+import './lib/cron';
 
 const app = express();
 
