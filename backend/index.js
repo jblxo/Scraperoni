@@ -1,9 +1,11 @@
 import express from 'express';
+import cors from 'cors';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
 import db from './lib/db';
 import './lib/cron';
 
 const app = express();
+app.use(cors());
 
 const PORT = 3030;
 

@@ -48,7 +48,7 @@ export async function runCron() {
     .write();
   db.get('instagram')
     .push({
-      data: Date.now(),
+      date: Date.now(),
       count: iCount
     })
     .write();
