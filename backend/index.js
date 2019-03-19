@@ -18,6 +18,15 @@ app.get('/scrape', async (req, res, next) => {
   });
 });
 
+app.get('/data', async (req, res, next) => {
+  const twitter = db.get('twitter').value();
+  const instagram = db.get('instagram').value();
+  res.json({
+    twitter,
+    instagram
+  });
+});
+
 app.listen(PORT, () => {
-  console.log(`Scraperoni is running on port ${PORT}!`);
+  console.log(`Scraperoni is running on port http://localhost:${PORT}`);
 });
